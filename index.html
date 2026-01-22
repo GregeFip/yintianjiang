@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="zh-CN"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;引天降 · 阴阳飞宫精算版&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body { background-color: #f4f1ea; font-family: "PingFang SC", serif; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.palace-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; background: #8b0000; border: 4px solid #8b0000; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.palace-cell { background: white; height: 110px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; padding: 2px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.palace-name { font-size: 13px; font-weight: bold; color: #333; position: absolute; top: 4px; left: 6px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.palace-num { font-size: 10px; color: #ddd; position: absolute; bottom: 2px; right: 4px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.active-god { font-weight: bold; font-size: 12px; text-align: center; line-height: 1.1; width: 100%; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body class="p-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="max-w-md mx-auto bg-white shadow-xl rounded-xl overflow-hidden border-t-8 border-red-900"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="p-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;header class="text-center mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h1 class="text-2xl font-bold text-red-900 mb-1"&gt;太岁禄马贵人飞宫图&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="text-xs text-gray-400 italic"&gt;支持阴阳贵人同步推演&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/header&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="space-y-4 mb-6 bg-stone-50 p-4 rounded-lg border"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="grid grid-cols-2 gap-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;label class="block text-xs font-bold text-gray-500 mb-1"&gt;流年年份&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;select id="yearSel" class="border p-2 rounded w-full bg-white text-lg font-serif"&gt;&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;label class="block text-xs font-bold text-gray-500 mb-1"&gt;用事月份&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;select id="monthSel" class="border p-2 rounded w-full bg-white text-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;option value="1"&gt;正月 (寅)&lt;/option&gt;&lt;option value="2"&gt;二月 (卯)&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;option value="3"&gt;三月 (辰)&lt;/option&gt;&lt;option value="4"&gt;四月 (巳)&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;option value="5"&gt;五月 (午)&lt;/option&gt;&lt;option value="6"&gt;六月 (未)&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;option value="7"&gt;七月 (申)&lt;/option&gt;&lt;option value="8"&gt;八月 (酉)&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;option value="9"&gt;九月 (戌)&lt;/option&gt;&lt;option value="10"&gt;十月 (亥)&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;option value="11"&gt;十一月 (子)&lt;/option&gt;&lt;option value="12"&gt;十二月 (丑)&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;label class="block text-xs font-bold text-gray-500 mb-2"&gt;节气时段&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex items-center gap-6 text-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;label class="flex items-center gap-1 cursor-pointer"&gt;&lt;input type="radio" name="dun" value="yang" checked class="accent-red-800"&gt; 冬至后 (阳遁)&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;label class="flex items-center gap-1 cursor-pointer"&gt;&lt;input type="radio" name="dun" value="yin" class="accent-red-800"&gt; 夏至后 (阴遁)&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button onclick="calculate()" class="w-full bg-red-900 text-white py-3 rounded-lg font-bold hover:bg-black transition shadow-md active:scale-95"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>生成动态飞宫图</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="resultGrid" class="hidden animate-in fade-in duration-500"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="text-center mb-3 text-sm font-bold text-stone-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span id="monthGZDisplay" class="bg-red-100 px-2 py-0.5 rounded text-red-900"&gt;&lt;/span&gt; 月入中宫 · &lt;span id="dunDisplay"&gt;&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="palace-grid"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="palace-cell" id="p4"&gt;&lt;span class="palace-name"&gt;巽宫&lt;/span&gt;&lt;div class="active-god"&gt;&lt;/div&gt;&lt;span class="palace-num"&gt;4&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="palace-cell" id="p9"&gt;&lt;span class="palace-name"&gt;离宫&lt;/span&gt;&lt;div class="active-god"&gt;&lt;/div&gt;&lt;span class="palace-num"&gt;9&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="palace-cell" id="p2"&gt;&lt;span class="palace-name"&gt;坤宫&lt;/span&gt;&lt;div class="active-god"&gt;&lt;/div&gt;&lt;span class="palace-num"&gt;2&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="palace-cell" id="p3"&gt;&lt;span class="palace-name"&gt;震宫&lt;/span&gt;&lt;div class="active-god"&gt;&lt;/div&gt;&lt;span class="palace-num"&gt;3&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="palace-cell" id="p5" style="background:#fffcf0;"&gt;&lt;span class="palace-name"&gt;中宫&lt;/span&gt;&lt;div class="active-god"&gt;&lt;/div&gt;&lt;span class="palace-num"&gt;5&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="palace-cell" id="p7"&gt;&lt;span class="palace-name"&gt;兑宫&lt;/span&gt;&lt;div class="active-god"&gt;&lt;/div&gt;&lt;span class="palace-num"&gt;7&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="palace-cell" id="p8"&gt;&lt;span class="palace-name"&gt;艮宫&lt;/span&gt;&lt;div class="active-god"&gt;&lt;/div&gt;&lt;span class="palace-num"&gt;8&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="palace-cell" id="p1"&gt;&lt;span class="palace-name"&gt;坎宫&lt;/span&gt;&lt;div class="active-god"&gt;&lt;/div&gt;&lt;span class="palace-num"&gt;1&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="palace-cell" id="p6"&gt;&lt;span class="palace-name"&gt;乾宫&lt;/span&gt;&lt;div class="active-god"&gt;&lt;/div&gt;&lt;span class="palace-num"&gt;6&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="mt-6 space-y-2 border-t pt-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div id="infoLu" class="flex justify-between p-2 bg-red-50 rounded text-xs"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div id="infoMa" class="flex justify-between p-2 bg-blue-50 rounded text-xs"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div id="infoGuiYang" class="flex justify-between p-2 bg-purple-50 rounded text-xs"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div id="infoGuiYin" class="flex justify-between p-2 bg-stone-100 rounded text-xs"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const stems = "甲乙丙丁戊己庚辛壬癸".split("");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const branches = "子丑寅卯辰巳午未申酉戌亥".split("");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const jiazi = [];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>for(let i=0; i&lt;60; i++) jiazi.push(stems[i%10] + branches[i%12]);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const yearSel = document.getElementById('yearSel');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const now = new Date().getFullYear();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>for(let i = now + 15; i &gt;= now - 85; i--) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let off = (i-4)%60; if(off&lt;0) off+=60;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>yearSel.add(new Option(`${i}年 (${stems[off%10]}${branches[off%12]})`, i));</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>yearSel.value = now;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function calculate() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const y = parseInt(yearSel.value);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const m = parseInt(document.getElementById('monthSel').value);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const isYang = document.querySelector('input[name="dun"]:checked').value === 'yang';</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let yOff = (y-4)%60; if(yOff&lt;0) yOff+=60;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const yS = stems[yOff%10], yB = branches[yOff%12];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const getTrueGZ = (b) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const start = {"甲":2,"己":2,"乙":4,"庚":4,"丙":6,"辛":6,"丁":8,"壬":8,"戊":0,"癸":0}[yS];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const diff = (branches.indexOf(b)-2+12)%12;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return stems[(start+diff)%10] + b;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// 禄马贵人映射</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const luB = {"甲":"寅","乙":"卯","丙":"巳","丁":"午","戊":"巳","己":"午","庚":"申","辛":"酉","壬":"亥","癸":"子"}[yS];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const maB = {"申":"寅","子":"寅","辰":"寅","寅":"申","午":"申","戌":"申","巳":"亥","酉":"亥","丑":"亥","亥":"巳","卯":"巳","未":"巳"}[yB];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const yangGuiB = {"甲":"丑","乙":"子","丙":"亥","丁":"亥","戊":"丑","己":"子","庚":"丑","辛":"午","壬":"卯","癸":"卯"}[yS];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const yinGuiB = {"甲":"未","乙":"申","丙":"酉","丁":"酉","戊":"未","己":"申","庚":"未","辛":"寅","壬":"巳","癸":"巳"}[yS];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const luGZ = getTrueGZ(luB), maGZ = getTrueGZ(maB);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const yangGuiGZ = getTrueGZ(yangGuiB), yinGuiGZ = getTrueGZ(yinGuiB);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const mB = branches[(m+1)%12];<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const mS = stems[({"甲":2,"己":2,"乙":4,"庚":4,"丙":6,"辛":6,"丁":8,"壬":8,"戊":0,"癸":0}[yS] + (m-1)) % 10];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const monthGZ = mS + mB;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const path = isYang ? [5,6,7,8,9,1,2,3,4] : [5,4,3,2,1,9,8,7,6];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const getPalace = (targetGZ) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>let steps = (jiazi.indexOf(targetGZ) - jiazi.indexOf(monthGZ) + 60) % 60;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return path[steps % 9];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.querySelectorAll('.active-god').forEach(el =&gt; el.innerHTML = "");</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const renderGod = (gz, label, colorClass, infoId) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const p = getPalace(gz);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const pName = document.querySelector(`#p${p} .palace-name`).innerText;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.querySelector(`#p${p} .active-god`).innerHTML += `&lt;div class="${colorClass} mb-0.5"&gt;${label}&lt;span class="text-[9px] font-normal ml-0.5"&gt;${gz}&lt;/span&gt;&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById(infoId).innerHTML = `&lt;b&gt;${label}(${gz})&lt;/b&gt; &lt;span&gt;飞：${pName}&lt;/span&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('resultGrid').classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('monthGZDisplay').innerText = monthGZ;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('dunDisplay').innerText = isYang ? "阳遁顺飞" : "阴遁逆飞";</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>renderGod(luGZ, "真禄", "text-red-700", "infoLu");</p>
+<p class="p1"><span class="Apple-converted-space">            </span>renderGod(maGZ, "真马", "text-blue-700", "infoMa");</p>
+<p class="p1"><span class="Apple-converted-space">            </span>renderGod(yangGuiGZ, "阳贵", "text-purple-700", "infoGuiYang");</p>
+<p class="p1"><span class="Apple-converted-space">            </span>renderGod(yinGuiGZ, "阴贵", "text-stone-600", "infoGuiYin");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
