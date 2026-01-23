@@ -14,41 +14,65 @@
     <style>
         :root { --brand-red: #b91c1c; --bg-dark: #0a0a0a; }
         body { background-color: var(--bg-dark); color: #d1d1d6; font-family: "PingFang SC", "STHeiti", sans-serif; -webkit-tap-highlight-color: transparent; }
-        .yin-card { background: linear-gradient(145deg, #1c1c1e, #111112); border-top: 4px solid var(--brand-red); border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
-        .palace-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: #3a3a3c; border: 2px solid #3a3a3c; border-radius: 12px; overflow: hidden; }
-        .palace-cell { background: #151517; aspect-ratio: 1/1; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; padding: 2px; }
-        .palace-name { font-size: 10px; color: #48484a; position: absolute; top: 4px; left: 6px; }
-        .mountain-info { font-size: 8px; color: #2c2c2e; position: absolute; bottom: 2px; text-align: center; width: 100%; }
-        select { -webkit-appearance: none; background-color: #1a1a1c !important; border: 1px solid #27272a !important; background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; background-size: 16px; }
-        .btn-gold { background: linear-gradient(to right, #b91c1c, #7f1d1d); color: white; box-shadow: 0 4px 20px rgba(185, 28, 28, 0.4); }
-        .btn-gold:active { transform: scale(0.96); opacity: 0.9; }
-        .overlap-item { border-left: 3px solid var(--brand-red); background: rgba(185, 28, 28, 0.05); padding: 12px; border-radius: 0 12px 12px 0; margin-bottom: 10px; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-up { animation: fadeIn 0.5s ease-out forwards; }
+        .yin-card { background: linear-gradient(145deg, #1c1c1e, #111112); border-top: 4px solid var(--brand-red); border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.8); }
+        
+        /* 核心修复：网格容器宽度自适应 */
+        .palace-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 1px; 
+            background: #333; 
+            border: 1px solid #333; 
+            border-radius: 8px; 
+            overflow: hidden; 
+            width: 100%; /* 确保网格不超出父容器 */
+            box-sizing: border-box;
+        }
+        
+        .palace-cell { 
+            background: #151517; 
+            min-height: 80px; /* 移除 aspect-ratio，改用最小高度防止文字挤压 */
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            position: relative; 
+            padding: 8px 2px; 
+        }
+        
+        .palace-name { font-size: 9px; color: #48484a; position: absolute; top: 4px; left: 4px; }
+        .mountain-info { font-size: 7px; color: #2c2c2e; position: absolute; bottom: 2px; text-align: center; width: 100%; }
+        
+        /* 针对重叠文字的缩放优化 */
+        .gods-container { font-size: 10px; line-height: 1.2; text-align: center; width: 100%; }
+        .gods-item { margin-bottom: 2px; }
+
+        select { -webkit-appearance: none; background-color: #1a1a1c !important; border: 1px solid #27272a !important; background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; background-size: 14px; }
+        .btn-gold { background: linear-gradient(to right, #b91c1c, #7f1d1d); color: white; box-shadow: 0 4px 15px rgba(185, 28, 28, 0.4); }
+        .overlap-item { border-left: 3px solid var(--brand-red); background: rgba(185, 28, 28, 0.05); padding: 10px; border-radius: 0 10px 10px 0; margin-bottom: 8px; }
     </style>
 </head>
-<body class="p-4 pb-20">
-    <div class="max-w-md mx-auto">
-        <header class="text-center py-8">
-            <div class="mb-4 inline-block w-16 h-16 rounded-full border-2 border-red-900 overflow-hidden bg-white">
+<body class="p-3 pb-10">
+    <div class="w-full max-w-sm mx-auto"> <header class="text-center py-6">
+            <div class="mb-3 inline-block w-14 h-14 rounded-full border border-red-900 overflow-hidden bg-white">
                 <img src="icon.png" alt="Logo" onerror="this.style.display='none'" class="w-full h-full object-cover">
             </div>
-            <h1 class="text-3xl font-black tracking-[0.4em] text-red-700">引天降</h1>
-            <p class="text-[9px] text-zinc-600 mt-2 uppercase tracking-[0.3em]">Precision Metaphysics System</p>
+            <h1 class="text-2xl font-black tracking-[0.3em] text-red-700">引天降</h1>
+            <p class="text-[8px] text-zinc-600 mt-1 uppercase tracking-widest">Precision Metaphysics System</p>
         </header>
 
-        <div class="yin-card p-6 mb-8">
-            <div class="space-y-5">
+        <div class="yin-card p-5 mb-6">
+            <div class="space-y-4">
                 <div>
-                    <label class="block text-[10px] text-zinc-500 mb-2 font-bold uppercase">主要查询年</label>
-                    <select id="pY" class="w-full rounded-xl p-4 text-sm font-serif outline-none"></select>
+                    <label class="block text-[9px] text-zinc-500 mb-1 font-bold uppercase">主要查询年</label>
+                    <select id="pY" class="w-full rounded-lg p-3 text-sm font-serif outline-none"></select>
                 </div>
                 
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-[10px] text-zinc-500 mb-2 font-bold uppercase">用事月份</label>
-                        <select id="m" class="w-full rounded-xl p-3 text-sm" onchange="toggleDun()">
-                            <option value="0">常驻方位 (到山)</option>
+                        <label class="block text-[9px] text-zinc-500 mb-1 font-bold uppercase">月份</label>
+                        <select id="m" class="w-full rounded-lg p-2 text-xs" onchange="toggleDun()">
+                            <option value="0">常驻方位</option>
                             <option value="1">正月(寅)</option><option value="2">二月(卯)</option>
                             <option value="3">三月(辰)</option><option value="4">四月(巳)</option>
                             <option value="5">五月(午)</option><option value="6">六月(未)</option>
@@ -58,27 +82,27 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-[10px] text-zinc-500 mb-2 font-bold uppercase">叠吉对比</label>
-                        <select id="sY" class="w-full rounded-xl p-3 text-sm font-serif">
-                            <option value="0">关闭叠吉扫描</option>
+                        <label class="block text-[9px] text-zinc-500 mb-1 font-bold uppercase">对比年</label>
+                        <select id="sY" class="w-full rounded-lg p-2 text-xs font-serif">
+                            <option value="0">关闭</option>
                         </select>
                     </div>
                 </div>
 
                 <div id="dunBox" class="hidden">
-                    <div class="flex gap-6 justify-center bg-zinc-900/50 py-3 rounded-xl border border-zinc-800 text-[10px]">
-                        <label class="flex items-center gap-1"><input type="radio" name="d" value="y" checked class="accent-red-700"> 阳顺 (冬至后)</label>
-                        <label class="flex items-center gap-1"><input type="radio" name="d" value="i" class="accent-red-700"> 阴逆 (夏至后)</label>
+                    <div class="flex gap-4 justify-center bg-zinc-900/50 py-2 rounded-lg border border-zinc-800 text-[9px]">
+                        <label class="flex items-center gap-1"><input type="radio" name="d" value="y" checked class="accent-red-700"> 阳顺</label>
+                        <label class="flex items-center gap-1"><input type="radio" name="d" value="i" class="accent-red-700"> 阴逆</label>
                     </div>
                 </div>
 
-                <button onclick="calculate()" class="w-full btn-gold py-4 rounded-2xl font-bold text-sm tracking-widest uppercase">启动精算</button>
+                <button onclick="calculate()" class="w-full btn-gold py-3 rounded-xl font-bold text-xs tracking-widest uppercase">启动精算</button>
             </div>
         </div>
 
         <div id="res" class="hidden">
-            <div id="resHeader" class="text-center mb-6 text-xs text-zinc-500 italic border-b border-zinc-900 pb-4"></div>
-            <div id="displayArea" class="space-y-6"></div>
+            <div id="resHeader" class="text-center mb-4 text-[10px] text-zinc-500 italic border-b border-zinc-900 pb-2"></div>
+            <div id="displayArea" class="space-y-5"></div>
         </div>
     </div>
 
@@ -119,8 +143,8 @@
         function buildP(gods_data=[]) {
             let h = `<div class="palace-grid">`;
             [4,9,2,3,5,7,8,1,6].forEach(i=>{
-                let cG = gods_data.filter(g=>g.p===i).map(g=>`<div class="${g.c}">${g.n}<br><span class="text-[7px]">${g.gz}</span></div>`).join('');
-                h += `<div class="palace-cell"><span class="palace-name">${P_NAME[i]}</span><div class="gods text-center">${cG}</div><span class="mountain-info">${P_MT[i]}</span></div>`;
+                let cG = gods_data.filter(g=>g.p===i).map(g=>`<div class="gods-item ${g.c}">${g.n}<br><span class="text-[7px]">${g.gz}</span></div>`).join('');
+                h += `<div class="palace-cell"><span class="palace-name">${P_NAME[i]}</span><div class="gods-container">${cG}</div><span class="mountain-info">${P_MT[i]}</span></div>`;
             });
             return h + `</div>`;
         }
@@ -148,8 +172,8 @@
                         bG.forEach(bg=>tG.forEach(tg=>{ if(getP(bg.gz)===getP(tg.gz)) matches.push({p:getP(bg.gz), bN:bg.n, bG:bg.gz, tN:tg.n, tG:tg.gz}); }));
 
                         if(matches.length>0) {
-                            found=true; let card=`<div class="bg-zinc-900/30 p-4 rounded-[2rem] border border-zinc-800 animate-up">
-                                <div class="flex justify-between items-center mb-4 text-[11px] font-bold">
+                            found=true; let card=`<div class="bg-zinc-900/30 p-3 rounded-2xl border border-zinc-800">
+                                <div class="flex justify-between items-center mb-3 text-[10px] font-bold">
                                     <span class="text-red-600">${mo}月(${mGZ}) · ${isDunY?'阳顺':'阴逆'}</span>
                                     <span class="bg-red-900/30 text-red-500 px-2 py-0.5 rounded text-[8px]">OVERLAP</span>
                                 </div>`;
@@ -157,19 +181,19 @@
                             bG.forEach(g=>pD.push({p:getP(g.gz), n:"本"+g.n, gz:g.gz, c:"text-red-500 font-bold"}));
                             tG.forEach(g=>pD.push({p:getP(g.gz), n:"岁"+g.n, gz:g.gz, c:"text-zinc-500"}));
                             card += buildP(pD);
-                            matches.forEach(mx=> card+=`<div class="overlap-item mt-3 text-[10px]"><div class="font-bold">本命${mx.bN} 叠 太岁${mx.tN}</div><div class="text-zinc-500 mt-1">方位：${P_NAME[mx.p]} (${P_MT[mx.p]})</div></div>`);
+                            matches.forEach(mx=> card+=`<div class="overlap-item mt-2 text-[9px]"><div class="font-bold">本命${mx.bN} 叠 太岁${mx.tN}</div><div class="text-zinc-500 mt-1">方位：${P_NAME[mx.p]} (${P_MT[mx.p]})</div></div>`);
                             resArea.innerHTML += card + `</div>`;
                         }
                     });
                 }
                 if(!found) resArea.innerHTML=`<p class="text-center py-10 text-zinc-600 italic">年度暂无重叠吉位</p>`;
-            } else if(m === 0) { // 静态模式
+            } else if(m === 0) { // 静态
                 resH.innerText = `${py}年 静态常驻方位 (二十四山模式)`;
                 let pD=[]; let o=(py-4)%60; if(o<0)o+=60; const gods=getGods(py, S[o%10]);
-                gods.forEach(g=>pD.push({p:B_MAP[g.tb], n:g.n, gz:g.gz, c:"text-red-600 font-bold"}));
+                gods.forEach(g=>pD.push({p:B_MAP[g.tb], n:g.n, gz:g.gz, c: "text-red-600 font-bold"}));
                 resArea.innerHTML=buildP(pD);
-                gods.forEach(g=> resArea.innerHTML+=`<div class="overlap-item flex justify-between mt-2 text-[11px]"><span><b>${g.n}</b> (${g.gz})</span> <span class="text-zinc-500 italic">${g.tb}山</span></div>`);
-            } else { // 动态飞宫
+                gods.forEach(g=> resArea.innerHTML+=`<div class="overlap-item flex justify-between mt-2 text-[10px]"><span><b>${g.n}</b> (${g.gz})</span> <span class="text-zinc-500 italic">${g.tb}山</span></div>`);
+            } else { // 动态
                 let o=(py-4)%60; if(o<0)o+=60; let ts=S[o%10];
                 const mB=B[(m+1)%12], mS=S[({"甲":2,"己":2,"乙":4,"庚":4,"丙":6,"辛":6,"丁":8,"壬":8,"戊":0,"癸":0}[ts]+(m-1))%10], mGZ=mS+mB;
                 const path=isY?[5,6,7,8,9,1,2,3,4]:[5,4,3,2,1,9,8,7,6];
@@ -177,7 +201,7 @@
                 const gods=getGods(py, ts); let pD=[];
                 gods.forEach(g=>{ let p=path[((J.indexOf(g.gz)-J.indexOf(mGZ)+60)%60)%9]; pD.push({p, n:g.n, gz:g.gz, c:"text-red-600 font-bold"}); });
                 resArea.innerHTML=buildP(pD);
-                gods.forEach(g=>{ let p=path[((J.indexOf(g.gz)-J.indexOf(mGZ)+60)%60)%9]; resArea.innerHTML+=`<div class="overlap-item flex justify-between mt-2 text-[11px]"><span><b>${g.n}</b> (${g.gz})</span> <span class="text-zinc-500 italic">飞临${P_NAME[p]}</span></div>`; });
+                gods.forEach(g=>{ let p=path[((J.indexOf(g.gz)-J.indexOf(mGZ)+60)%60)%9]; resArea.innerHTML+=`<div class="overlap-item flex justify-between mt-2 text-[10px]"><span><b>${g.n}</b> (${g.gz})</span> <span class="text-zinc-500 italic">飞临${P_NAME[p]}</span></div>`; });
             }
             window.scrollTo({top: document.getElementById('res').offsetTop - 30, behavior: 'smooth'});
         }
